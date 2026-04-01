@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,Bot Storage,
+Building.BotStorage.Description,"A secure facility to store idle bots. Bots assigned here will power down, preventing deterioration and halting their fuel and energy consumption.",
+Building.BotStorage.FlavorDescription,"Even perfect machines need a place to power down and collect dust... safely.",

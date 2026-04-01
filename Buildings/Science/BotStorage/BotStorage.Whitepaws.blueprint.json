@@ -1,0 +1,574 @@
+{
+  "BuildingSpec": {
+    "SelectionSoundName": "Pile",
+    "LoopingSoundName": "",
+    "BuildingCost": [
+      {
+        "Id": "Plank",
+        "Amount": 120
+      },
+      {
+        "Id": "Gear",
+        "Amount": 60
+      },
+      {
+        "Id": "MetalBlock",
+        "Amount": 60
+      }
+    ],
+    "ScienceCost": 4000,
+    "PlaceFinished": false,
+    "FinishableWithBeaversOnSite": false,
+    "DrawRangeBoundsOnIt": false
+  },
+  "BuildingModelSpec": {
+    "FinishedModelName": "#Finished",
+    "UnfinishedModelName": "#Unfinished",
+    "FinishedUncoveredModelName": "",
+    "UndergroundModelName": "",
+    "ConstructionModeModel": "Finished",
+    "UndergroundModelDepth": 0
+  },
+  "BotStorageBuildingSpec": {
+  },
+  "FixedSlotManagerSpec": {
+  },
+  "WorkplaceSpec": {
+    "MaxWorkers": 10,
+    "DefaultWorkers": 10,
+    "DefaultWorkerType": "Bot",
+    "DisallowOtherWorkerTypes": true,
+    "WorkerTypeUnlockCosts": [
+    ]
+  },
+  "WorkplaceIlluminatorSpec": {
+  },
+  "EnterableSpec": {
+    "OperatingState": "Finished",
+    "LimitedCapacityFinished": true,
+    "CapacityFinished": 10,
+    "LimitedCapacityUnfinished": false,
+    "CapacityUnfinished": 0
+  },
+  "TemplateSpec": {
+    "TemplateName": "BotStorage.Whitepaws",
+    "BackwardCompatibleTemplateNames": [
+    ],
+    "RequiredFeatureToggle": "",
+    "DisablingFeatureToggle": ""
+  },
+  "BlockObjectSpec": {
+    "Size": {
+      "X": 2,
+      "Y": 5,
+      "Z": 2
+    },
+    "Blocks": [
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "GroundOrStackable",
+        "Occupations": "Bottom, Top, Corners, Path, Middle",
+        "Stackable": "None",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      },
+      {
+        "MatterBelow": "Any",
+        "Occupations": "All",
+        "Stackable": "BlockObject",
+        "OccupyAllBelow": false,
+        "Underground": false
+      }
+    ],
+    "Entrance": {
+      "HasEntrance": true,
+      "Coordinates": {
+        "X": 1,
+        "Y": -1,
+        "Z": 0
+      }
+    },
+    "BaseZ": 0,
+    "Overridable": false,
+    "Flippable": false
+  },
+  "BlockObjectNavMeshSettingsSpec": {
+    "NoAutoWalls": false,
+    "GenerateFloorsOnStackable": true,
+    "EdgeGroups": [
+    ],
+    "UnblockedCoordinates": [
+    ],
+    "BlockedEdges": [
+    ]
+  },
+  "BuildingAccessibleSpec": {
+    "LocalAccess": {
+      "X": 1.5,
+      "Y": 0.0,
+      "Z": 0.2
+    },
+    "ForceOneFinalAccess": false
+  },
+  "PlaceableBlockObjectSpec": {
+    "ToolGroupId": "Science",
+    "ToolOrder": 99,
+    "ToolShape": "Square",
+    "Layout": "Single",
+    "CustomPivot": {
+      "HasCustomPivot": false,
+      "Coordinates": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      }
+    },
+    "CanBeAttachedToTerrainSide": false,
+    "DevModeTool": false
+  },
+  "LabeledEntitySpec": {
+    "DisplayNameLocKey": "Building.BotStorage.DisplayName",
+    "DescriptionLocKey": "Building.BotStorage.Description",
+    "FlavorDescriptionLocKey": "Building.BotStorage.FlavorDescription",
+    "Icon": "Buildings/Storage/MediumWarehouse/MediumWarehouseIcon"
+  },
+  "ConstructionSiteProgressVisualizerSpec": {
+    "ProgressThresholds": [
+      0.0
+    ]
+  },
+  "TransformSlotInitializerSpec": {
+    "Slots": [
+      {
+        "SlotKeyword": "BotKey",
+        "Animation": "ForcedAPose",
+        "Inanimate": false,
+        "RandomizeYRotation": false,
+        "WaterSlot": false
+      }
+    ]
+  },
+  "PrioritySlotRetrieverSpec": {
+    "PrioritySlotNames": [
+      "#Slot#BotKey.10",
+      "#Slot#BotKey.09",
+      "#Slot#BotKey.08",
+      "#Slot#BotKey.07",
+      "#Slot#BotKey.06",
+      "#Slot#BotKey.05",
+      "#Slot#BotKey.04",
+      "#Slot#BotKey.03",
+      "#Slot#BotKey.01",
+      "#Slot#BotKey.02"
+    ]
+  },
+  "Children": {
+    "#Finished": {
+      "TimbermeshSpec": {
+        "Model": "Buildings/Science/BotStorage/BotStorage.Whitepaws.Model"
+      },
+      "CollidersSpec": {
+        "BoxColliders": [
+          {
+            "Center": {
+              "X": 1.0,
+              "Y": 0.1,
+              "Z": 2.5
+            },
+            "Size": {
+              "X": 2.0,
+              "Y": 0.2,
+              "Z": 5.0
+            }
+          },
+          {
+            "Center": {
+              "X": 1.0,
+              "Y": 1.9,
+              "Z": 2.5
+            },
+            "Size": {
+              "X": 2.0,
+              "Y": 0.2,
+              "Z": 5.0
+            }
+          }
+        ],
+        "SphereColliders": [
+        ],
+        "CapsuleColliders": [
+        ]
+      },
+      "Children": {
+        "slots": {
+          "TransformSpec": {
+            "Position": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Rotation": {
+              "X": 0.0,
+              "Y": 0.0,
+              "Z": 0.0
+            },
+            "Scale": {
+              "X": 1.0,
+              "Y": 1.0,
+              "Z": 1.0
+            }
+          },
+          "Children": {
+            "#Slot#BotKey.01": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 0.5,
+                  "Y": 0.1,
+                  "Z": 0.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.02": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 1.5,
+                  "Y": 0.1,
+                  "Z": 0.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.03": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 0.5,
+                  "Y": 0.1,
+                  "Z": 1.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.04": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 1.5,
+                  "Y": 0.1,
+                  "Z": 1.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.05": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 0.5,
+                  "Y": 0.1,
+                  "Z": 2.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.06": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 1.5,
+                  "Y": 0.1,
+                  "Z": 2.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.07": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 0.5,
+                  "Y": 0.1,
+                  "Z": 3.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.08": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 1.5,
+                  "Y": 0.1,
+                  "Z": 3.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.09": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 0.5,
+                  "Y": 0.1,
+                  "Z": 4.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            },
+            "#Slot#BotKey.10": {
+              "TransformSpec": {
+                "Position": {
+                  "X": 1.5,
+                  "Y": 0.1,
+                  "Z": 4.5
+                },
+                "Rotation": {
+                  "X": 0.0,
+                  "Y": 180.0,
+                  "Z": 0.0
+                },
+                "Scale": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 1.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "#Unfinished": {
+      "Children": {
+        "ConstructionBase2x5#nested": {
+          "BlueprintPath": "ConstructionBases/ConstructionBase2x5/ConstructionBase2x5.blueprint"
+        },
+        "ConstructionStage0": {
+          "TimbermeshSpec": {
+            "Model": "Buildings/Science/BotStorage/BotStorage.Whitepaws.Construction.Model"
+          },
+          "CollidersSpec": {
+            "BoxColliders": [
+              {
+                "Center": {
+                  "X": 1.0,
+                  "Y": 1.0,
+                  "Z": 2.5
+                },
+                "Size": {
+                  "X": 2.0,
+                  "Y": 2.0,
+                  "Z": 5.0
+                }
+              }
+            ],
+            "SphereColliders": [
+            ],
+            "CapsuleColliders": [
+            ]
+          }
+        }
+      }
+    }
+  }
+}
