@@ -1,3 +1,7 @@
+1.0.3
+Fixed TemplateCollectionSpec for Whitepaws.
+Added optional dependencies.
+Refactored loading bothead icon.
 1.0.2
 Hide No Workers warning
 1.0.1

@@ -3,6 +3,7 @@ using HarmonyLib;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Timberborn.AssetSystem;
 using Timberborn.Automation;
 using Timberborn.AutomationBuildings;
 using Timberborn.BaseComponentSystem;
@@ -168,26 +169,37 @@ namespace Calloatti.BotStorage
   }
 
   // Banner Setter
-  public class BotStorageBannerSetter : BaseComponent, IAwakableComponent, IFinishedStateListener
+  public class BotStorageBannerSetter : BaseComponent, IAwakableComponent, IFinishedStateListener, IDeletableEntity
   {
     private static readonly Color BannerIconColor = new Color(0.33f, 0.33f, 0.33f);
-    private readonly GoodIconVisualizer _goodIconVisualizer;
-    private readonly IGoodService _goodService;
+    private readonly IAssetLoader _assetLoader;
 
     private BlockObject _blockObject;
     private MeshRenderer _meshRenderer;
     private Material _cachedMaterial;
 
-    public BotStorageBannerSetter(GoodIconVisualizer goodIconVisualizer, IGoodService goodService)
+    // Cache the texture statically so we only query the asset loader once per game session
+    private static Texture2D _botHeadTexture;
+    private static bool _textureLoaded = false;
+
+    private static readonly int IconColorProperty = Shader.PropertyToID("_DetailAlbedoUV2Color");
+    private static readonly int TextureProperty = Shader.PropertyToID("_DetailAlbedoMap2");
+
+    public BotStorageBannerSetter(IAssetLoader assetLoader)
     {
-      _goodIconVisualizer = goodIconVisualizer;
-      _goodService = goodService;
+      _assetLoader = assetLoader;
     }
 
     public void Awake()
     {
       _blockObject = GetComponent<BlockObject>();
       BuildingModel component = GetComponent<BuildingModel>();
+
+      if (!_textureLoaded)
+      {
+        _botHeadTexture = _assetLoader.LoadSafe<Texture2D>("Sprites/Goods/BotHeadIcon");
+        _textureLoaded = true;
+      }
 
       // First, try to find a separated BannerMesh if they made one
       Transform bannerTransform = component.FinishedModel.transform.Find("BannerMesh");
@@ -205,23 +217,31 @@ namespace Calloatti.BotStorage
 
     public void OnEnterFinishedState()
     {
-      if (_meshRenderer != null)
+      if (_meshRenderer != null && _botHeadTexture != null)
       {
-        // We grab and cache the material HERE, after the game has assigned 
-        // the final runtime textures and materials to the finished building.
+        // Accessing .material creates a clone of the material in memory just for this building
         if (_cachedMaterial == null)
         {
           _cachedMaterial = _meshRenderer.material;
         }
 
-        GoodSpec good = _goodService.GetGood("BotHead");
-
-        // This command natively uses UV2 and the _DetailAlbedoMap2 shader property
-        _goodIconVisualizer.ShowColoredIcon(_cachedMaterial, good, _blockObject.FlipMode.IsFlipped, BannerIconColor);
+        // Apply the texture and color directly to the shader properties used by Timberborn's Decal/UV2 system
+        _cachedMaterial.SetTexture(TextureProperty, _botHeadTexture);
+        _cachedMaterial.SetColor(IconColorProperty, BannerIconColor);
       }
     }
 
     public void OnExitFinishedState() { }
+
+    // Flush the cloned material from memory when the building gets demolished
+    public void DeleteEntity()
+    {
+      if (_cachedMaterial != null)
+      {
+        UnityEngine.Object.Destroy(_cachedMaterial);
+        _cachedMaterial = null;
+      }
+    }
   }
 
   [Context("Game")]

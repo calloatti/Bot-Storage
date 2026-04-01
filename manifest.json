@@ -1,6 +1,6 @@
 {
   "Name": "Bot Storage",
-  "Version": "1.0.2",
+  "Version": "1.0.3",
   "Id": "Calloatti.BotStorage",
   "MinimumGameVersion": "1.0.12.5",
   "Description": "Adds a storage facility where bots can be assigned to power down, halting their aging and resource consumption.",
@@ -10,5 +10,15 @@
       "MinVersion": "2.4.1"
     }
   ],
-  "OptionalMods": []
+  "OptionalMods": [
+    {
+      "Id": "Lapantoufleagic.WhitepawsFaction"
+    },
+    {
+      "Id": "Emberpelts"
+    },
+    {
+      "Id": "Leafcoats"
+    }
+  ]
 }
