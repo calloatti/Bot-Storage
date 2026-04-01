@@ -18,6 +18,7 @@ using Timberborn.ModManagerScene;
 using Timberborn.NeedSystem;
 using Timberborn.PrioritySystem;
 using Timberborn.SlotSystem;
+using Timberborn.StatusSystem;
 using Timberborn.TemplateInstantiation;
 using Timberborn.WorkSystem;
 using UnityEngine;
@@ -34,6 +35,7 @@ namespace Calloatti.BotStorage
 
   public record BotStorageBuildingSpec : ComponentSpec;
 
+  // Removed IStatusHider to prevent the ECS crash
   public class BotStorageBuilding : BaseComponent, IAwakableComponent, IUpdatableComponent, IDeletableEntity
   {
     private Enterable _enterable;
@@ -242,6 +244,29 @@ namespace Calloatti.BotStorage
       builder.AddDecorator<BotStorageBuildingSpec, PausableBuilding>();
 
       return builder.Build();
+    }
+  }
+
+  // Stops the "Unstaffed/No Workers" warning from ever registering onto the Bot Storage building
+  [HarmonyPatch(typeof(StatusSubject), nameof(StatusSubject.RegisterStatus))]
+  public static class PreventUnstaffedStatusPatch
+  {
+    public static bool Prefix(StatusSubject __instance, StatusToggle statusToggle)
+    {
+      // If this status is trying to attach to our BotStorageBuilding
+      if (__instance.GetComponent<BotStorageBuilding>() != null)
+      {
+        // Target the internal SpriteName, which is hardcoded and language-independent!
+        string spriteName = statusToggle.StatusSpecification.SpriteName ?? "";
+
+        // Timberborn uses "NoUnemployed" for the lack of workers icon
+        if (spriteName.Contains("NoUnemployed"))
+        {
+          // Return false to completely skip running the original method, effectively blocking the warning
+          return false;
+        }
+      }
+      return true;
     }
   }
 

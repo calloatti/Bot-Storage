@@ -1,3 +1,5 @@
+1.0.2
+Hide No Workers warning
 1.0.1
 Added missing models
 1.0.0
