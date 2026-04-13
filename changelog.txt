@@ -1,3 +1,5 @@
+1.0.4
+Made building flippable.
 1.0.3
 Fixed TemplateCollectionSpec for Whitepaws.
 Added optional dependencies.

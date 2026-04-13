@@ -215,7 +215,7 @@
     },
     "BaseZ": 0,
     "Overridable": false,
-    "Flippable": false
+    "Flippable": true
   },
   "BlockObjectNavMeshSettingsSpec": {
     "NoAutoWalls": false,
