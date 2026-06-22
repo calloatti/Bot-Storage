@@ -1,12 +1,13 @@
 {
   "ItemId": "3695659857",
   "Name": "Bot Storage",
-  "Visibility": "Unlisted",
-  "UpdateDescription": true,
-  "UpdateVisibility": true,
-  "UpdatePreview": true,
+  "Visibility": "Public",
+  "UpdateDescription": false,
+  "UpdateVisibility": false,
+  "UpdatePreview": false,
   "UpdateTags": true,
   "Tags": [
+    "Update 1.1",
     "Update 1.0",
     "New content",
     "Buildings"
