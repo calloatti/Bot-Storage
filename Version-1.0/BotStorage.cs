@@ -2,7 +2,9 @@ using Bindito.Core;
 using HarmonyLib;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
+using System.Reflection;
 using Timberborn.AssetSystem;
 using Timberborn.Automation;
 using Timberborn.AutomationBuildings;
@@ -36,13 +38,20 @@ namespace Calloatti.BotStorage
 
   public record BotStorageBuildingSpec : ComponentSpec;
 
-  // Removed IStatusHider to prevent the ECS crash
   public class BotStorageBuilding : BaseComponent, IAwakableComponent, IUpdatableComponent, IDeletableEntity
   {
     private Enterable _enterable;
     private SlotManager _slotManager;
     private float _easterEggTimer;
     private float _nextEasterEggTime;
+
+    private bool _initializedLoadedBots = false;
+
+    // OPTIMIZATION: Thread-safe O(1) tracking
+    public static readonly ConcurrentDictionary<Deteriorable, bool> ProtectedBots = new();
+
+    private static FieldInfo _slotsField;
+    private static FieldInfo _transformSlotSpecField;
 
     private static readonly string[] EasterEggAnimations = { "ForcedIdle", "Sleeping", "Sitting", "CharacterControl", "Stranded" };
 
@@ -51,7 +60,12 @@ namespace Calloatti.BotStorage
       _enterable = GetComponent<Enterable>();
       _slotManager = GetComponent<SlotManager>();
 
-      // Safely subscribe using named methods
+      if (_slotsField == null)
+      {
+        _slotsField = AccessTools.Field(typeof(SlotManager), "_slots");
+        _transformSlotSpecField = AccessTools.Field(typeof(TransformSlot), "_transformSlotSpec");
+      }
+
       _enterable.EntererAdded += OnEntererAdded;
       _enterable.EntererRemoved += OnEntererRemoved;
 
@@ -59,7 +73,6 @@ namespace Calloatti.BotStorage
       ResetEasterEggTimer();
     }
 
-    // Implement IDeletableEntity to prevent memory leaks when the building is destroyed
     public void DeleteEntity()
     {
       if (_enterable != null)
@@ -73,12 +86,18 @@ namespace Calloatti.BotStorage
     {
       NeedManager nm = e.Enterer.GetComponent<NeedManager>();
       if (nm != null) foreach (var n in nm.NeedSpecs) nm.DisableUpdate(n.Id);
+
+      Deteriorable deteriorable = e.Enterer.GetComponent<Deteriorable>();
+      if (deteriorable != null) ProtectedBots.TryAdd(deteriorable, true);
     }
 
     private void OnEntererRemoved(object sender, EntererRemovedEventArgs e)
     {
       NeedManager nm = e.Enterer.GetComponent<NeedManager>();
       if (nm != null) foreach (var n in nm.NeedSpecs) nm.EnableUpdate(n.Id);
+
+      Deteriorable deteriorable = e.Enterer.GetComponent<Deteriorable>();
+      if (deteriorable != null) ProtectedBots.TryRemove(deteriorable, out _);
 
       CharacterAnimator animator = e.Enterer.GetComponent<CharacterAnimator>();
       if (animator != null)
@@ -95,6 +114,16 @@ namespace Calloatti.BotStorage
 
     public void Update()
     {
+      if (!_initializedLoadedBots)
+      {
+        _initializedLoadedBots = true;
+        foreach (var bot in _enterable.EnterersInside)
+        {
+          Deteriorable deteriorable = bot.GetComponent<Deteriorable>();
+          if (deteriorable != null) ProtectedBots.TryAdd(deteriorable, true);
+        }
+      }
+
       if (_enterable.NumberOfEnterersInside == 0) return;
 
       _easterEggTimer += Time.deltaTime;
@@ -127,12 +156,12 @@ namespace Calloatti.BotStorage
 
       string defaultAnim = "ForcedAPose";
 
-      var slots = Traverse.Create(_slotManager).Field("_slots").GetValue<List<ISlot>>();
+      var slots = _slotsField?.GetValue(_slotManager) as List<ISlot>;
       var botSlot = slots?.OfType<TransformSlot>().FirstOrDefault(s => s.AssignedEnterer == bot);
 
       if (botSlot != null)
       {
-        var spec = Traverse.Create(botSlot).Field("_transformSlotSpec").GetValue<TransformSlotSpec>();
+        var spec = _transformSlotSpecField?.GetValue(botSlot) as TransformSlotSpec;
         if (spec != null)
         {
           defaultAnim = spec.Animation;
@@ -153,7 +182,6 @@ namespace Calloatti.BotStorage
 
       yield return new WaitForSeconds(UnityEngine.Random.Range(3f, 6f));
 
-      // Re-verify that both the bot and its animator still exist after the wait
       if (bot != null && animator != null && _enterable.EnterersInside.Contains(bot))
       {
         if (animator.HasParameter(randomAnim))
@@ -168,7 +196,6 @@ namespace Calloatti.BotStorage
     }
   }
 
-  // Banner Setter
   public class BotStorageBannerSetter : BaseComponent, IAwakableComponent, IFinishedStateListener, IDeletableEntity
   {
     private static readonly Color BannerIconColor = new Color(0.33f, 0.33f, 0.33f);
@@ -178,7 +205,6 @@ namespace Calloatti.BotStorage
     private MeshRenderer _meshRenderer;
     private Material _cachedMaterial;
 
-    // Cache the texture statically so we only query the asset loader once per game session
     private static Texture2D _botHeadTexture;
     private static bool _textureLoaded = false;
 
@@ -201,7 +227,6 @@ namespace Calloatti.BotStorage
         _textureLoaded = true;
       }
 
-      // First, try to find a separated BannerMesh if they made one
       Transform bannerTransform = component.FinishedModel.transform.Find("BannerMesh");
 
       if (bannerTransform != null)
@@ -210,7 +235,6 @@ namespace Calloatti.BotStorage
       }
       else
       {
-        // Fallback: If they kept it as one mesh but added UV2, grab the main building mesh
         _meshRenderer = component.FinishedModel.GetComponentInChildren<MeshRenderer>();
       }
     }
@@ -219,13 +243,11 @@ namespace Calloatti.BotStorage
     {
       if (_meshRenderer != null && _botHeadTexture != null)
       {
-        // Accessing .material creates a clone of the material in memory just for this building
         if (_cachedMaterial == null)
         {
           _cachedMaterial = _meshRenderer.material;
         }
 
-        // Apply the texture and color directly to the shader properties used by Timberborn's Decal/UV2 system
         _cachedMaterial.SetTexture(TextureProperty, _botHeadTexture);
         _cachedMaterial.SetColor(IconColorProperty, BannerIconColor);
       }
@@ -233,7 +255,6 @@ namespace Calloatti.BotStorage
 
     public void OnExitFinishedState() { }
 
-    // Flush the cloned material from memory when the building gets demolished
     public void DeleteEntity()
     {
       if (_cachedMaterial != null)
@@ -267,22 +288,17 @@ namespace Calloatti.BotStorage
     }
   }
 
-  // Stops the "Unstaffed/No Workers" warning from ever registering onto the Bot Storage building
   [HarmonyPatch(typeof(StatusSubject), nameof(StatusSubject.RegisterStatus))]
   public static class PreventUnstaffedStatusPatch
   {
     public static bool Prefix(StatusSubject __instance, StatusToggle statusToggle)
     {
-      // If this status is trying to attach to our BotStorageBuilding
       if (__instance.GetComponent<BotStorageBuilding>() != null)
       {
-        // Target the internal SpriteName, which is hardcoded and language-independent!
         string spriteName = statusToggle.StatusSpecification.SpriteName ?? "";
 
-        // Timberborn uses "NoUnemployed" for the lack of workers icon
         if (spriteName.Contains("NoUnemployed"))
         {
-          // Return false to completely skip running the original method, effectively blocking the warning
           return false;
         }
       }
@@ -290,24 +306,15 @@ namespace Calloatti.BotStorage
     }
   }
 
+  // Restored: The highly optimized O(1) Deterioration Patch
   [HarmonyPatch(typeof(Deteriorable), nameof(Deteriorable.Tick))]
   public static class DeteriorableTickPatch
   {
     public static bool Prefix(Deteriorable __instance)
     {
-      Worker worker = __instance.GetComponent<Worker>();
-      if (worker != null && worker.Employed)
+      if (BotStorageBuilding.ProtectedBots.ContainsKey(__instance))
       {
-        var workplace = worker.Workplace;
-        if (workplace != null && workplace.GetComponent<BotStorageBuilding>() != null)
-        {
-          var enterable = workplace.GetComponent<Enterable>();
-          var enterer = worker.GetComponent<Enterer>();
-          if (enterable != null && enterer != null && enterable.EnterersInside.Contains(enterer))
-          {
-            return false;
-          }
-        }
+        return false;
       }
       return true;
     }

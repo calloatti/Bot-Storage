@@ -1,3 +1,7 @@
+1.0.5
+Optimized deterioration checks to fix FPS drops.
+Optimized animation logic to prevent micro-stutters.
+Fixed loaded bots deteriorating inside the storage.
 1.0.4
 Made building flippable.
 1.0.3
