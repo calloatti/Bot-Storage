@@ -1,16 +1,28 @@
-1.0.5
-Optimized deterioration checks to fix FPS drops.
-Optimized animation logic to prevent micro-stutters.
-Fixed loaded bots deteriorating inside the storage.
-1.0.4
-Made building flippable.
-1.0.3
-Fixed TemplateCollectionSpec for Whitepaws.
-Added optional dependencies.
-Refactored loading bothead icon.
-1.0.2
-Hide No Workers warning
-1.0.1
-Added missing models
-1.0.0
-Initial release
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0
+Mod Version: 1.0.5
+- Optimized deterioration checks to fix FPS drops.
+- Optimized animation logic to prevent micro-stutters.
+- Fixed loaded bots deteriorating inside the storage.
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0
+Mod Version: 1.0.4
+- Made building flippable.
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0
+Mod Version: 1.0.3
+- Fixed TemplateCollectionSpec for Whitepaws.
+- Added optional dependencies.
+- Refactored loading bothead icon.
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0
+Mod Version: 1.0.2
+- Hide No Workers warning
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0
+Mod Version: 1.0.1
+- Added missing models
+--------------------------------------------------------------------------------
+Game Version: 1.0.0.0
+Mod Version: 1.0.0
+- Initial release
