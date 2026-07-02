@@ -1,4 +1,4 @@
-{
+﻿{
   "BuildingSpec": {
     "SelectionSoundName": "Pile",
     "LoopingSoundName": "",
@@ -29,20 +29,16 @@
     "ConstructionModeModel": "Finished",
     "UndergroundModelDepth": 0
   },
-  "BotStorageBuildingSpec": {
-  },
-  "FixedSlotManagerSpec": {
-  },
+  "BotStorageBuildingSpec": {},
+  "FixedSlotManagerSpec": {},
   "WorkplaceSpec": {
     "MaxWorkers": 10,
     "DefaultWorkers": 10,
     "DefaultWorkerType": "Bot",
     "DisallowOtherWorkerTypes": true,
-    "WorkerTypeUnlockCosts": [
-    ]
+    "WorkerTypeUnlockCosts": []
   },
-  "WorkplaceIlluminatorSpec": {
-  },
+  "WorkplaceIlluminatorSpec": {},
   "EnterableSpec": {
     "OperatingState": "Finished",
     "LimitedCapacityFinished": true,
@@ -52,8 +48,7 @@
   },
   "TemplateSpec": {
     "TemplateName": "BotStorage.Emberpelts",
-    "BackwardCompatibleTemplateNames": [
-    ],
+    "BackwardCompatibleTemplateNames": [],
     "RequiredFeatureToggle": "",
     "DisablingFeatureToggle": ""
   },
@@ -220,12 +215,9 @@
   "BlockObjectNavMeshSettingsSpec": {
     "NoAutoWalls": false,
     "GenerateFloorsOnStackable": true,
-    "EdgeGroups": [
-    ],
-    "UnblockedCoordinates": [
-    ],
-    "BlockedEdges": [
-    ]
+    "EdgeGroups": [],
+    "UnblockedCoordinates": [],
+    "BlockedEdges": []
   },
   "BuildingAccessibleSpec": {
     "LocalAccess": {
@@ -319,10 +311,8 @@
             }
           }
         ],
-        "SphereColliders": [
-        ],
-        "CapsuleColliders": [
-        ]
+        "SphereColliders": [],
+        "CapsuleColliders": []
       },
       "Children": {
         "slots": {
@@ -562,10 +552,8 @@
                 }
               }
             ],
-            "SphereColliders": [
-            ],
-            "CapsuleColliders": [
-            ]
+            "SphereColliders": [],
+            "CapsuleColliders": []
           }
         }
       }
