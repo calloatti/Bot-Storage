@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Botenlager",
+Building.BotStorage.Description,"Eine sichere Einrichtung zur Lagerung untätiger Boten. Hier zugewiesene Boten schalten sich ab, verhindern Verschleiß und stoppen ihren Treibstoff- und Energieverbrauch.",
+Building.BotStorage.FlavorDescription,"Selbst perfekte Maschinen brauchen einen Ort zum Abschalten und um ... sicher Staub zu sammeln.",

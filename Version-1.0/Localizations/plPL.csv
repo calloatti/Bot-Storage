@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Magazyn botów",
+Building.BotStorage.Description,"Bezpieczny obiekt do przechowywania bezczynnych botów. Boty tu przypisane wyłączą się, zapobiegając degradacji i zatrzymując zużycie paliwa i energii.",
+Building.BotStorage.FlavorDescription,"Nawet idealne maszyny potrzebują miejsca, aby się wyłączyć i bezpiecznie zbierać kurz.",

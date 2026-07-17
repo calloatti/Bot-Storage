@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Depósito de robôs",
+Building.BotStorage.Description,"Uma instalação segura para armazenar robôs ociosos. Robôs designados aqui serão desligados, prevenindo deterioração e interrompendo o consumo de combustível e energia.",
+Building.BotStorage.FlavorDescription,"Até máquinas perfeitas precisam de um lugar para desligar e acumular poeira... com segurança.",

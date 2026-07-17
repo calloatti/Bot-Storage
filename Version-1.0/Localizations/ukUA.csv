@@ -1,0 +1,5 @@
+ID,Text,Comment
+human-made-translation,"human-made-translation",
+Building.BotStorage.DisplayName,Сховище ботів,
+Building.BotStorage.Description,"Надійне сховище для ботів, які не виконують роботу. Призначені сюди боти вимикаються, що запобігає їхньому зношенню та зупиняє споживання палива й енергії.",
+Building.BotStorage.FlavorDescription,"Навіть досконалим машинам потрібне місце, щоб вимкнутися й спокійно припадати пилом... у безпеці.",

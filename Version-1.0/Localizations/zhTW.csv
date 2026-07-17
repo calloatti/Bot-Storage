@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"機器人倉庫",
+Building.BotStorage.Description,"一個用於儲存閒置機器人的安全設施。指派到此處的機器人將關機，防止劣化並停止燃料和能源消耗。",
+Building.BotStorage.FlavorDescription,"即使是完美的機器也需要一個關機並安全積灰塵的地方。",

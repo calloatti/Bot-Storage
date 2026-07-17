@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Entrepôt de bots",
+Building.BotStorage.Description,"Une installation sécurisée pour stocker les bots inactifs. Les bots assignés ici s'éteindront, empêchant la détérioration et stoppant leur consommation de carburant et d'énergie.",
+Building.BotStorage.FlavorDescription,"Même les machines parfaites ont besoin d'un endroit pour s'éteindre et accumuler la poussière... en toute sécurité.",

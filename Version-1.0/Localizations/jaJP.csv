@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"ボット倉庫",
+Building.BotStorage.Description,"アイドル状態のボットを保管するための安全な施設。ここに割り当てられたボットは電源が切れ、劣化を防ぎ、燃料とエネルギーの消費を停止します。",
+Building.BotStorage.FlavorDescription,"完璧な機械でさえ、電源を切って安全に埃をかぶる場所が必要です。",

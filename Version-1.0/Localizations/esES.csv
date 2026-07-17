@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Almacén de bots",
+Building.BotStorage.Description,"Una instalación segura para almacenar bots inactivos. Los bots asignados aquí se apagarán, evitando el deterioro y deteniendo su consumo de combustible y energía.",
+Building.BotStorage.FlavorDescription,"Incluso las máquinas perfectas necesitan un lugar para apagarse y acumular polvo... de forma segura.",

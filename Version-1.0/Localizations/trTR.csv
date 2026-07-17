@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Bot Deposu",
+Building.BotStorage.Description,"Boştaki botları depolamak için güvenli bir tesis. Buraya atanan botlar kapanarak bozulmayı önler ve yakıt ile enerji tüketimini durdurur.",
+Building.BotStorage.FlavorDescription,"Mükemmel makinelerin bile kapanıp güvenle toz toplayacak bir yere ihtiyacı vardır.",

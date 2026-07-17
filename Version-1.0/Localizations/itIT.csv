@@ -1,0 +1,4 @@
+ID,Text,Comment
+Building.BotStorage.DisplayName,"Deposito robot",
+Building.BotStorage.Description,"Una struttura sicura per immagazzinare robot inattivi. I robot qui assegnati si spegneranno, prevenendo il deterioramento e fermando il consumo di carburante ed energia.",
+Building.BotStorage.FlavorDescription,"Anche le macchine perfette hanno bisogno di un posto dove spegnersi e raccogliere polvere... in sicurezza.",
