@@ -1,26 +1,16 @@
 using Bindito.Core;
 using HarmonyLib;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-using System.Linq;
-using System.Reflection;
 using Timberborn.AssetSystem;
-using Timberborn.Automation;
-using Timberborn.AutomationBuildings;
 using Timberborn.BaseComponentSystem;
 using Timberborn.BlockSystem;
 using Timberborn.BlueprintSystem;
 using Timberborn.Buildings;
-using Timberborn.CharacterModelSystem;
 using Timberborn.DeteriorationSystem;
 using Timberborn.EnterableSystem;
 using Timberborn.EntitySystem;
-using Timberborn.Goods;
 using Timberborn.ModManagerScene;
 using Timberborn.NeedSystem;
-using Timberborn.PrioritySystem;
-using Timberborn.SlotSystem;
 using Timberborn.StatusSystem;
 using Timberborn.TemplateInstantiation;
 using Timberborn.WorkSystem;
@@ -38,39 +28,21 @@ namespace Calloatti.BotStorage
 
   public record BotStorageBuildingSpec : ComponentSpec;
 
-  public class BotStorageBuilding : BaseComponent, IAwakableComponent, IUpdatableComponent, IDeletableEntity
+  public class BotStorageBuilding : BaseComponent, IAwakableComponent, IInitializableEntity, IDeletableEntity
   {
     private Enterable _enterable;
-    private SlotManager _slotManager;
-    private float _easterEggTimer;
-    private float _nextEasterEggTime;
-
-    private bool _initializedLoadedBots = false;
 
     // OPTIMIZATION: Thread-safe O(1) tracking
     public static readonly ConcurrentDictionary<Deteriorable, bool> ProtectedBots = new();
 
-    private static FieldInfo _slotsField;
-    private static FieldInfo _transformSlotSpecField;
-
-    private static readonly string[] EasterEggAnimations = { "ForcedIdle", "Sleeping", "Sitting", "CharacterControl", "Stranded" };
-
     public void Awake()
     {
       _enterable = GetComponent<Enterable>();
-      _slotManager = GetComponent<SlotManager>();
-
-      if (_slotsField == null)
-      {
-        _slotsField = AccessTools.Field(typeof(SlotManager), "_slots");
-        _transformSlotSpecField = AccessTools.Field(typeof(TransformSlot), "_transformSlotSpec");
-      }
 
       _enterable.EntererAdded += OnEntererAdded;
       _enterable.EntererRemoved += OnEntererRemoved;
 
       GetComponent<WorkplacePriority>()?.SetPriority(Timberborn.PrioritySystem.Priority.VeryLow);
-      ResetEasterEggTimer();
     }
 
     public void DeleteEntity()
@@ -98,100 +70,14 @@ namespace Calloatti.BotStorage
 
       Deteriorable deteriorable = e.Enterer.GetComponent<Deteriorable>();
       if (deteriorable != null) ProtectedBots.TryRemove(deteriorable, out _);
-
-      CharacterAnimator animator = e.Enterer.GetComponent<CharacterAnimator>();
-      if (animator != null)
-      {
-        foreach (string anim in EasterEggAnimations)
-        {
-          if (animator.HasParameter(anim))
-          {
-            animator.SetBool(anim, false);
-          }
-        }
-      }
     }
 
-    public void Update()
+    public void InitializeEntity()
     {
-      if (!_initializedLoadedBots)
+      foreach (var bot in _enterable.EnterersInside)
       {
-        _initializedLoadedBots = true;
-        foreach (var bot in _enterable.EnterersInside)
-        {
-          Deteriorable deteriorable = bot.GetComponent<Deteriorable>();
-          if (deteriorable != null) ProtectedBots.TryAdd(deteriorable, true);
-        }
-      }
-
-      if (_enterable.NumberOfEnterersInside == 0) return;
-
-      _easterEggTimer += Time.deltaTime;
-      if (_easterEggTimer >= _nextEasterEggTime)
-      {
-        TriggerEasterEgg();
-        ResetEasterEggTimer();
-      }
-    }
-
-    private void ResetEasterEggTimer()
-    {
-      _easterEggTimer = 0f;
-      _nextEasterEggTime = UnityEngine.Random.Range(30f, 120f);
-    }
-
-    private void TriggerEasterEgg()
-    {
-      var bots = _enterable.EnterersInside.ToList();
-      if (bots.Count == 0) return;
-
-      var randomBot = bots[UnityEngine.Random.Range(0, bots.Count)];
-      GetComponent<MonoBehaviour>().StartCoroutine(EasterEggRoutine(randomBot));
-    }
-
-    private IEnumerator EasterEggRoutine(Enterer bot)
-    {
-      CharacterAnimator animator = bot.GetComponent<CharacterAnimator>();
-      if (animator == null) yield break;
-
-      string defaultAnim = "ForcedAPose";
-
-      var slots = _slotsField?.GetValue(_slotManager) as List<ISlot>;
-      var botSlot = slots?.OfType<TransformSlot>().FirstOrDefault(s => s.AssignedEnterer == bot);
-
-      if (botSlot != null)
-      {
-        var spec = _transformSlotSpecField?.GetValue(botSlot) as TransformSlotSpec;
-        if (spec != null)
-        {
-          defaultAnim = spec.Animation;
-        }
-      }
-
-      string randomAnim = EasterEggAnimations[UnityEngine.Random.Range(0, EasterEggAnimations.Length)];
-
-      if (animator.HasParameter(defaultAnim))
-      {
-        animator.SetBool(defaultAnim, false);
-      }
-
-      if (animator.HasParameter(randomAnim))
-      {
-        animator.SetBool(randomAnim, true);
-      }
-
-      yield return new WaitForSeconds(UnityEngine.Random.Range(3f, 6f));
-
-      if (bot != null && animator != null && _enterable.EnterersInside.Contains(bot))
-      {
-        if (animator.HasParameter(randomAnim))
-        {
-          animator.SetBool(randomAnim, false);
-        }
-        if (animator.HasParameter(defaultAnim))
-        {
-          animator.SetBool(defaultAnim, true);
-        }
+        Deteriorable deteriorable = bot.GetComponent<Deteriorable>();
+        if (deteriorable != null) ProtectedBots.TryAdd(deteriorable, true);
       }
     }
   }

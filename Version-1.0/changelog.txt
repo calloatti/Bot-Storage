@@ -1,3 +1,7 @@
+* Game Version: 1.0.0.0 - Mod Version: 1.0.6
+- Removed easter egg animations and reflection-based code.
+- Reworked to fully event-driven, eliminating per-frame updates.
+- Made the mod compatible with game version 1.1 (replaced removed IStartableComponent with IInitializableEntity).
 * Game Version: 1.0.0.0 - Mod Version: 1.0.5
 - Optimized deterioration checks to fix FPS drops.
 - Optimized animation logic to prevent micro-stutters.
