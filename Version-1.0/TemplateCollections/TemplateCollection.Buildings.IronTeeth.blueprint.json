@@ -1,8 +1,6 @@
 ﻿{
   "TemplateCollectionSpec": {
     "CollectionId": "Buildings.IronTeeth",
-    "Blueprints#append": [
-      "Buildings/Science/BotStorage/BotStorage.IronTeeth.blueprint"
-    ]
+    "Blueprints#append": ["Buildings/Science/BotStorage/BotStorage.IronTeeth.blueprint"]
   }
 }

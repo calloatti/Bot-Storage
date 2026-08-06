@@ -1,8 +1,6 @@
 ﻿{
   "TemplateCollectionSpec": {
     "CollectionId": "Buildings.Emberpelts",
-    "Blueprints#append": [
-      "Buildings/Science/BotStorage/BotStorage.Emberpelts.blueprint"
-    ]
+    "Blueprints#append": ["Buildings/Science/BotStorage/BotStorage.Emberpelts.blueprint"]
   }
 }

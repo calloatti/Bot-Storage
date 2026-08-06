@@ -1,8 +1,6 @@
 ﻿{
   "TemplateCollectionSpec": {
     "CollectionId": "Buildings.LeafCoats",
-    "Blueprints#append": [
-      "Buildings/Science/BotStorage/BotStorage.LeafCoats.blueprint"
-    ]
+    "Blueprints#append": ["Buildings/Science/BotStorage/BotStorage.LeafCoats.blueprint"]
   }
 }

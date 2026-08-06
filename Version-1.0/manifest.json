@@ -4,21 +4,6 @@
   "Id": "Calloatti.BotStorage",
   "MinimumGameVersion": "1.0.12.5",
   "Description": "Adds a storage facility where bots can be assigned to power down, halting their aging and resource consumption.",
-  "RequiredMods": [
-    {
-      "Id": "Harmony",
-      "MinVersion": "2.4.1"
-    }
-  ],
-  "OptionalMods": [
-    {
-      "Id": "Lapantoufleagic.WhitepawsFaction"
-    },
-    {
-      "Id": "Emberpelts"
-    },
-    {
-      "Id": "Leafcoats"
-    }
-  ]
+  "RequiredMods": [{"Id": "Harmony", "MinVersion": "2.4.1"}],
+  "OptionalMods": [{"Id": "Lapantoufleagic.WhitepawsFaction"}, {"Id": "Emberpelts"}, {"Id": "Leafcoats"}]
 }

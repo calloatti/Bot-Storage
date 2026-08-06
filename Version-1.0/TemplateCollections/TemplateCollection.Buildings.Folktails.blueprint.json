@@ -1,8 +1,6 @@
 ﻿{
   "TemplateCollectionSpec": {
     "CollectionId": "Buildings.Folktails",
-    "Blueprints#append": [
-      "Buildings/Science/BotStorage/BotStorage.Folktails.blueprint"
-    ]
+    "Blueprints#append": ["Buildings/Science/BotStorage/BotStorage.Folktails.blueprint"]
   }
 }

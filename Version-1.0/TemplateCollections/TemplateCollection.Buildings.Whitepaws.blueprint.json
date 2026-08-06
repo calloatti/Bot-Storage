@@ -1,8 +1,6 @@
 ﻿{
   "TemplateCollectionSpec": {
     "CollectionId": "Whitepaws_Science",
-    "Blueprints#append": [
-      "Buildings/Science/BotStorage/BotStorage.Whitepaws.blueprint"
-    ]
+    "Blueprints#append": ["Buildings/Science/BotStorage/BotStorage.Whitepaws.blueprint"]
   }
 }
