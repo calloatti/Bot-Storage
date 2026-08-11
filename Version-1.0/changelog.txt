@@ -1,3 +1,5 @@
+* Game Version: 1.0.0.0 - Mod Version: 1.0.7
+- Removed reflection
 * Game Version: 1.0.0.0 - Mod Version: 1.0.6
 - Removed easter egg animations and reflection-based code.
 - Reworked to fully event-driven, eliminating per-frame updates.
