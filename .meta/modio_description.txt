@@ -1,0 +1,8 @@
+<p>Adds a storage facility where bots can be assigned to power down, halting their aging and resource consumption.</p>
+<p>Supports IronTeeth, Folktails, Emberpelts, LeafCoats, Whitepaws.</p>
+<hr />
+<p><a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3682179025">Mods on Steam</a></p>
+<p><a href="https://mod.io/u/calloatti/?_sort=name">Mods on mod-dot-io</a></p>
+<p><a href="https://github.com/search?q=owner%3Acalloatti+sort%3Aname-asc+%22Timberborn+Mod%22&amp;type=repositories">Mods on Github</a></p>
+<p><a href="https://github.com/calloatti/ModZips">Mod zip files</a></p>
+

@@ -1,0 +1,1 @@
+Adds a storage facility where bots can be assigned to power down, halting their aging and resource consumption.
