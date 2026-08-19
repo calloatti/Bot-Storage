@@ -1,2 +1,2 @@
-* Game Version: 1.0.0.0 - Mod Version: 1.0.7
-- Removed reflection
+* Game Version: 1.0.0.0 - Mod Version: 1.0.8
+- Refactored source into separate files (ModStarter, Configurator, Building, Patches)

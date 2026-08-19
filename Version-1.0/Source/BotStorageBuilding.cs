@@ -1,5 +1,3 @@
-using Bindito.Core;
-using HarmonyLib;
 using System.Collections.Concurrent;
 using Timberborn.AssetSystem;
 using Timberborn.BaseComponentSystem;
@@ -9,23 +7,13 @@ using Timberborn.Buildings;
 using Timberborn.DeteriorationSystem;
 using Timberborn.EnterableSystem;
 using Timberborn.EntitySystem;
-using Timberborn.ModManagerScene;
 using Timberborn.NeedSystem;
-using Timberborn.StatusSystem;
-using Timberborn.TemplateInstantiation;
+using Timberborn.TemplateSystem;
 using Timberborn.WorkSystem;
 using UnityEngine;
 
 namespace Calloatti.BotStorage
 {
-  public class BotStorageModStarter : IModStarter
-  {
-    public void StartMod(IModEnvironment modEnvironment)
-    {
-      new Harmony("calloatti.botstorage").PatchAll();
-    }
-  }
-
   public record BotStorageBuildingSpec : ComponentSpec;
 
   public class BotStorageBuilding : BaseComponent, IAwakableComponent, IInitializableEntity, IDeletableEntity
@@ -148,61 +136,6 @@ namespace Calloatti.BotStorage
         UnityEngine.Object.Destroy(_cachedMaterial);
         _cachedMaterial = null;
       }
-    }
-  }
-
-  [Context("Game")]
-  public class BotStorageConfigurator : Configurator
-  {
-    protected override void Configure()
-    {
-      Bind<BotStorageBuilding>().AsTransient();
-      Bind<BotStorageBannerSetter>().AsTransient();
-      MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
-    }
-
-    private static TemplateModule ProvideTemplateModule()
-    {
-      var builder = new TemplateModule.Builder();
-
-      builder.AddDecorator<BotStorageBuildingSpec, BotStorageBuilding>();
-      builder.AddDecorator<BotStorageBuildingSpec, WaitInsideIdlyWorkplaceBehavior>();
-      builder.AddDecorator<BotStorageBuildingSpec, BotStorageBannerSetter>();
-      builder.AddDecorator<BotStorageBuildingSpec, PausableBuilding>();
-
-      return builder.Build();
-    }
-  }
-
-  [HarmonyPatch(typeof(StatusSubject), nameof(StatusSubject.RegisterStatus))]
-  public static class PreventUnstaffedStatusPatch
-  {
-    public static bool Prefix(StatusSubject __instance, StatusToggle statusToggle)
-    {
-      if (__instance.GetComponent<BotStorageBuilding>() != null)
-      {
-        string spriteName = statusToggle.StatusSpecification.SpriteName ?? "";
-
-        if (spriteName.Contains("NoUnemployed"))
-        {
-          return false;
-        }
-      }
-      return true;
-    }
-  }
-
-  // Restored: The highly optimized O(1) Deterioration Patch
-  [HarmonyPatch(typeof(Deteriorable), nameof(Deteriorable.Tick))]
-  public static class DeteriorableTickPatch
-  {
-    public static bool Prefix(Deteriorable __instance)
-    {
-      if (BotStorageBuilding.ProtectedBots.ContainsKey(__instance))
-      {
-        return false;
-      }
-      return true;
     }
   }
 }

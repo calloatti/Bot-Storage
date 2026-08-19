@@ -49,3 +49,8 @@ Prefix returns `false` (skips original `Deteriorable.Tick`) when `BotStorageBuil
 - The `InitializeEntity()` one-time population scan and the `Awake()` event subscriptions are the only load-time costs.
 - `Deteriorable.Tick` patch runs once per game **tick** per deteriorating bot. Cost is a `ContainsKey` on a `ConcurrentDictionary`.
 - `ProtectedBots` is a static `ConcurrentDictionary` (O(1) lookups, thread-safe); entries are added/removed strictly via `EntererAdded`/`EntererRemoved`, so there is no drift or leak.
+
+## Hard Rule
+DO NOT EVER TOUCH THE DEPLOY FOLDER.
+
+BUILD DOES EVERYTHING, NEVER EVER MESS WITH THE DEPLOY PROCESS.
