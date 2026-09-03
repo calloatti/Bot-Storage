@@ -1,4 +1,4 @@
-* Game Version: 1.0.13.1 - Mod Version: 1.0.9
+* Game Version: 1.1.2.4 - Mod Version: 1.0.9
 - Updated due to 1.1.2.4 release
 * Game Version: 1.0.0.0 - Mod Version: 1.0.8
 - Refactored source into separate files (ModStarter, Configurator, Building, Patches)
